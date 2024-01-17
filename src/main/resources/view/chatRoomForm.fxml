@@ -1,8 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 
 <AnchorPane prefHeight="800.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.group_chat_app.controller.ChatRoomFormController">
-
+   <children>
+      <ScrollPane focusTraversable="false" hbarPolicy="NEVER" layoutX="20.0" layoutY="20.0" prefHeight="670.0" prefWidth="660.0">
+         <content>
+            <VBox fx:id="vbox" alignment="TOP_CENTER" prefHeight="668.0" prefWidth="658.0" style="-fx-background-color: #D2CECE;" />
+         </content>
+      </ScrollPane>
+      <TextField fx:id="txtMessage" focusTraversable="false" layoutX="20.0" layoutY="724.0" prefHeight="40.0" prefWidth="570.0" promptText="Type a message">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <Button focusTraversable="false" layoutX="610.0" layoutY="724.0" mnemonicParsing="false" onAction="#btnSendOnAction" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: blue;" text="Send" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button focusTraversable="false" layoutX="542.0" layoutY="729.0" mnemonicParsing="false" onAction="#btnGalleryOnAction" prefHeight="30.0" prefWidth="40.0" />
+      <ImageView fitHeight="30.0" fitWidth="38.0" layoutX="543.0" layoutY="730.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asset/Group%203.png" />
+         </image>
+      </ImageView>
+   </children>
 </AnchorPane>
