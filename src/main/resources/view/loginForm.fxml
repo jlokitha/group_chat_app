@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.group_chat_app.controller.LoginFormController">
+   <children>
+      <Button layoutX="500.0" layoutY="335.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="30.0" prefWidth="70.0" text="Log In" />
+      <TextField fx:id="txtUserName" layoutX="131.0" layoutY="335.0" prefHeight="30.0" prefWidth="350.0" promptText="User Name" />
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="275.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asset/profile.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
