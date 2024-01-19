@@ -15,13 +15,13 @@ import java.util.Objects;
 public class LoginFormController {
     @FXML
     public TextField txtUserName;
-    public static String userName;
 
     @FXML
     public void btnLoginOnAction ( ActionEvent event ) {
-        userName = txtUserName.getText ();
+        ChatRoomFormController.username = txtUserName.getText ();
         try {
-            Parent parent = FXMLLoader.load ( Objects.requireNonNull ( LoginFormController.class.getResource ( "/view/chatRoomForm.fxml" ) ) );
+            Parent parent = FXMLLoader.load ( this.getClass ().getResource ( "/view/chatRoomForm.fxml" ) );
+            System.out.println ( " hri hutto " );
             Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
             stage.setScene ( new Scene ( parent ) );
             stage.centerOnScreen ();

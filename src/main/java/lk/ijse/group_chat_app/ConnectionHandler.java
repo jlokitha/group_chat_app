@@ -18,11 +18,12 @@ public class ConnectionHandler implements Runnable {
             in = new BufferedReader ( new InputStreamReader ( client.getInputStream () ) );
             out = new DataOutputStream ( client.getOutputStream () );
 
-            String message = in.readLine ();
+            String message;
 
-            while ( message != null ) {
+            while ( (message = in.readLine ()) != null ) {
+                System.out.println ( "message sent for server: " + message );
                 if ( message.startsWith ( "Username" ) ) {
-                    String[] user = message.split ( " " );
+                    String[] user = message.split ( "/" );
 
                     if ( user.length == 2 ) {
                         username = user[1];
@@ -32,6 +33,7 @@ public class ConnectionHandler implements Runnable {
                     Server.getServer ().broadcast ( username + " left !" );
                     shutdown ();
                 } else {
+                    System.out.println ( "message for broadcast: " + message );
                     Server.getServer ().broadcast ( username + ": " + message );
                 }
             }
