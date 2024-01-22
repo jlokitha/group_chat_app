@@ -30,7 +30,7 @@
       <Button focusTraversable="false" layoutX="542.0" layoutY="729.0" mnemonicParsing="false" onAction="#btnGalleryOnAction" prefHeight="30.0" prefWidth="40.0" />
       <ImageView fitHeight="30.0" fitWidth="38.0" layoutX="543.0" layoutY="730.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../asset/Group%203.png" />
+            <Image url="@../asset/camera.png" />
          </image>
       </ImageView>
    </children>

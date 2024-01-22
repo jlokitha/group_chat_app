@@ -38,7 +38,9 @@ public class Server implements Runnable {
 
     public void broadcast(String message) {
         for (ConnectionHandler client : connectionList) {
-            client.sendMessage ( message );
+            if ( client != null ) {
+                client.sendMessage ( message );
+            }
         }
     }
 

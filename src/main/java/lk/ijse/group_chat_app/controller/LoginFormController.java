@@ -21,7 +21,6 @@ public class LoginFormController {
         ChatRoomFormController.username = txtUserName.getText ();
         try {
             Parent parent = FXMLLoader.load ( this.getClass ().getResource ( "/view/chatRoomForm.fxml" ) );
-            System.out.println ( " hri hutto " );
             Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
             stage.setScene ( new Scene ( parent ) );
             stage.centerOnScreen ();
