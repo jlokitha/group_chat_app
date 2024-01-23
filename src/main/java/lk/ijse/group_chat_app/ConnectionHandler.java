@@ -23,18 +23,31 @@ public class ConnectionHandler implements Runnable {
             while ( (message = in.readUTF ()) != null ) {
 
                 if ( message.startsWith ( "Username" ) ) {
-                    String[] user = message.split ( "/" );
+                    String[] user = message.split ( " " );
+
 
                     if ( user.length == 2 ) {
                         username = user[1];
-                        Server.getServer ().broadcast ( user[1] + " Joined the chat !" );
+                        Server.getServer ().broadcastText ( user[1] + " Joined the chat !" );
                     }
+
                 } else if (message.startsWith ( "Shutdown" )) {
-                    Server.getServer ().broadcast ( username + " left !" );
+
+                    Server.getServer ().broadcastText ( username + " left !" );
                     shutdown ();
-                } else {
-                    System.out.println ( username + " sent message for broadcast: " + message );
-                    Server.getServer ().broadcast ( username + ": " + message );
+
+                } else if ( message.startsWith ( "/txt" ) ){
+
+                    Server.getServer ().broadcastText ( username + ": " + in.readUTF () );
+
+                } else if ( message.startsWith ( "/img" ) ) {
+
+                    int imageLength = in.readInt ( );
+
+                    byte[] imageData = new byte[imageLength];
+                    in.readFully ( imageData );
+
+                    Server.getServer ().broadcastImage ( username, imageData );
                 }
             }
         } catch ( IOException e ) {
@@ -44,7 +57,28 @@ public class ConnectionHandler implements Runnable {
 
     public void sendMessage(String message) {
         try {
+            out.writeUTF ( "/txt" );
+            out.flush ();
+
             out.writeUTF ( message );
+            out.flush ();
+        } catch ( IOException e ) {
+            e.printStackTrace ();
+        }
+    }
+
+    public void sendImage( String sender, byte[] imageData ) {
+        try {
+            out.writeUTF ( "/img" );
+            out.flush ();
+
+            out.writeInt ( imageData.length );
+            out.flush ();
+
+            out.writeUTF ( sender );
+            out.flush ();
+
+            out.write ( imageData );
             out.flush ();
         } catch ( IOException e ) {
             e.printStackTrace ();

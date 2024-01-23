@@ -4,16 +4,21 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
-import lk.ijse.group_chat_app.InputHandler;
+import javafx.stage.FileChooser;
+import lk.ijse.group_chat_app.OutputHandler;
 
 import java.io.*;
 import java.net.Socket;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ResourceBundle;
 
 public class ChatRoomFormController implements Runnable, Initializable {
@@ -32,7 +37,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
 
     public static String username;
 
-    InputHandler inputHandler;
+    OutputHandler inputHandler;
 
     private ChatRoomFormController client;
 
@@ -47,15 +52,30 @@ public class ChatRoomFormController implements Runnable, Initializable {
             in = new DataInputStream ( new BufferedInputStream ( remoteSocket.getInputStream ( ) ) );
             out = new DataOutputStream ( remoteSocket.getOutputStream ( ) );
 
-            inputHandler = new InputHandler ( out );
+            inputHandler = new OutputHandler ( out );
 
-            inputHandler.handleInput ( "Username/" + username );
+            inputHandler.handleTextOutput ( "Username " + username );
 
             String message;
 
             while ( ( message = in.readUTF ( ) ) != null ) {
-                System.out.println (message );
-                setTextToVbox ( message );
+
+                if ( message.equals ( "/txt" ) ) {
+
+                    setTextToVbox ( in.readUTF () );
+
+                } else if ( message.equals ( "/img" ) ) {
+
+                    int imageLength = in.readInt ( );
+
+                    String sender = in.readUTF ();
+
+                    byte[] imageData = new byte[imageLength];
+                    in.readFully ( imageData );
+
+                    setImgToVbox ( sender, imageData );
+                }
+
             }
         } catch ( IOException e ) {
             e.printStackTrace ();
@@ -63,28 +83,77 @@ public class ChatRoomFormController implements Runnable, Initializable {
     }
 
     @FXML
-    void btnGalleryOnAction( ActionEvent event) {
+    void btnGalleryOnAction( ActionEvent event) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Image File");
 
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
+        );
+
+        File file = fileChooser.showOpenDialog ( txtMessage.getScene ( ).getWindow ( ) );
+
+        if (file != null) {
+
+            byte[] imageBytes = Files.readAllBytes(file.toPath());
+
+            inputHandler.handleImageOutput ( imageBytes );
+        }
     }
 
     public void setTextToVbox(String message) {
-        Platform.runLater(() -> {
-            TextFlow text = new TextFlow(new Text(message));
+        Platform.runLater ( ( ) -> {
+            TextFlow text = new TextFlow ( new Text ( message ) );
 
-            if (message.startsWith(username)) {
-                text.setTextAlignment(TextAlignment.RIGHT);
+            if ( message.startsWith ( username ) ) {
+                text.setTextAlignment ( TextAlignment.RIGHT );
             } else {
-                text.setTextAlignment(TextAlignment.LEFT);
+                text.setTextAlignment ( TextAlignment.LEFT );
             }
 
-            vbox.getChildren().add(text);
+            vbox.getChildren ( ).add ( text );
+
+        } );
+    }
+
+    public void setImgToVbox( String sender, byte[] imageData ) {
+        Platform.runLater(() -> {
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(imageData);
+            Image image = new Image(inputStream);
+
+            ImageView imageView = new ImageView(image);
+            imageView.setFitWidth(400);
+            imageView.setFitHeight(400);
+            imageView.setPreserveRatio(true);
+
+            if ( !sender.startsWith ( username ) ) {
+
+                TextFlow text = new TextFlow ( new Text ( sender ) );
+                text.setTextAlignment ( TextAlignment.LEFT );
+                vbox.getChildren ().add ( text );
+
+//                vbox.setAlignment ( Pos.TOP_LEFT );
+                imageView.setX ( 0 );
+                imageView.setY ( 0 );
+                vbox.getChildren ( ).add ( imageView );
+
+            } else {
+
+                TextFlow text = new TextFlow ( new Text ( "Me" ) );
+                text.setTextAlignment ( TextAlignment.RIGHT );
+                vbox.getChildren ().add ( text );
+
+                vbox.setAlignment ( Pos.TOP_RIGHT );
+                vbox.getChildren ().add ( imageView );
+            }
         });
     }
 
     @FXML
     void btnSendOnAction(ActionEvent event) {
         try {
-            inputHandler.handleInput ( txtMessage.getText () );
+            inputHandler.handleTextOutput ( txtMessage.getText () );
+            txtMessage.clear ();
         } catch ( IOException e ) {
             e.printStackTrace ();
         }
