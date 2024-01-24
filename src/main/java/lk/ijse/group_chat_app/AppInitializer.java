@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class AppInitializer extends Application {
 
@@ -16,6 +17,7 @@ public class AppInitializer extends Application {
     public void start ( Stage stage ) throws Exception {
         AnchorPane root = FXMLLoader.load ( getClass ( ).getResource ( "/view/loginForm.fxml" ) );
         stage.setScene ( new Scene ( root ) );
+        stage.initStyle ( StageStyle.UNDECORATED );
         stage.centerOnScreen ();
         stage.show ();
     }

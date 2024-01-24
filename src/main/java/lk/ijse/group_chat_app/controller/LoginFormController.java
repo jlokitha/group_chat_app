@@ -6,11 +6,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class LoginFormController {
     @FXML
@@ -28,5 +30,16 @@ public class LoginFormController {
         } catch ( IOException e ) {
             e.printStackTrace ();
         }
+    }
+
+    @FXML
+    public void imgCloseOnMouseClicked ( MouseEvent mouseEvent ) {
+        System.exit ( 0 );
+    }
+
+    @FXML
+    public void imgMinimizeOnMouseClicked ( MouseEvent mouseEvent ) {
+        Stage stage = (Stage)((ImageView)mouseEvent.getSource()).getScene().getWindow();
+        stage.setIconified(true);
     }
 }

@@ -8,11 +8,13 @@ import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import lk.ijse.group_chat_app.OutputHandler;
 
 import java.io.*;
@@ -37,7 +39,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
 
     public static String username;
 
-    OutputHandler inputHandler;
+    OutputHandler outputHandler;
 
     private ChatRoomFormController client;
 
@@ -48,13 +50,13 @@ public class ChatRoomFormController implements Runnable, Initializable {
     @Override
     public void run () {
         try {
-            remoteSocket = new Socket ( "192.168.1.108", 5000 );
+            remoteSocket = new Socket ( "192.168.1.109", 5000 );
             in = new DataInputStream ( new BufferedInputStream ( remoteSocket.getInputStream ( ) ) );
             out = new DataOutputStream ( remoteSocket.getOutputStream ( ) );
 
-            inputHandler = new OutputHandler ( out );
+            outputHandler = new OutputHandler ( out );
 
-            inputHandler.handleTextOutput ( "Username " + username );
+            outputHandler.handleTextOutput ( "Username " + username );
 
             String message;
 
@@ -97,7 +99,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
 
             byte[] imageBytes = Files.readAllBytes(file.toPath());
 
-            inputHandler.handleImageOutput ( imageBytes );
+            outputHandler.handleImageOutput ( imageBytes );
         }
     }
 
@@ -132,7 +134,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
                 text.setTextAlignment ( TextAlignment.LEFT );
                 vbox.getChildren ().add ( text );
 
-//                vbox.setAlignment ( Pos.TOP_LEFT );
+                vbox.setAlignment ( Pos.TOP_LEFT );
                 imageView.setX ( 0 );
                 imageView.setY ( 0 );
                 vbox.getChildren ( ).add ( imageView );
@@ -152,10 +154,36 @@ public class ChatRoomFormController implements Runnable, Initializable {
     @FXML
     void btnSendOnAction(ActionEvent event) {
         try {
-            inputHandler.handleTextOutput ( txtMessage.getText () );
+            outputHandler.handleTextOutput ( txtMessage.getText () );
             txtMessage.clear ();
         } catch ( IOException e ) {
             e.printStackTrace ();
+        }
+    }
+
+    @FXML
+    public void imgCloseOnMouseClicked ( MouseEvent mouseEvent ) {
+        shutdown ();
+        System.exit ( 0 );
+    }
+
+    @FXML
+    public void imgMinimizeOnMouseClicked ( MouseEvent mouseEvent ) {
+        Stage stage = ( Stage) ((ImageView)mouseEvent.getSource ()).getScene ().getWindow ();
+        stage.setIconified ( true );
+    }
+
+    public void shutdown() {
+        try {
+            outputHandler.handleTextOutput ( "Shutdown" );
+            in.close ();
+            out.close ();
+
+            if ( !remoteSocket.isClosed () ) {
+                remoteSocket.close ();
+            }
+        } catch ( IOException e ) {
+            // Ignore
         }
     }
 

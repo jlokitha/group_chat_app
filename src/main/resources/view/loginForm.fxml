@@ -15,5 +15,15 @@
             <Image url="@../asset/profile.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="667.0" layoutY="8.0" onMouseClicked="#imgCloseOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asset/close.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="634.0" layoutY="8.0" onMouseClicked="#imgMinimizeOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asset/minimize.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
