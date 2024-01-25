@@ -28,7 +28,7 @@ public class ConnectionHandler implements Runnable {
 
                     if ( user.length == 2 ) {
                         username = user[1];
-                        Server.getServer ().broadcastText ( user[1] + " Joined the chat !" );
+                        Server.getServer ().broadcastText ( user[1] + ":Joined the chat !" );
                     }
 
                 } else if (message.startsWith ( "Shutdown" )) {
@@ -38,7 +38,7 @@ public class ConnectionHandler implements Runnable {
 
                 } else if ( message.startsWith ( "/txt" ) ){
 
-                    Server.getServer ().broadcastText ( username + ": " + in.readUTF () );
+                    Server.getServer ().broadcastText ( username + ":" + in.readUTF () );
 
                 } else if ( message.startsWith ( "/img" ) ) {
 

@@ -9,24 +9,24 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.group_chat_app.controller.ChatRoomFormController">
+<AnchorPane prefHeight="800.0" prefWidth="700.0" style="-fx-background-color: #D2CECE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.group_chat_app.controller.ChatRoomFormController">
    <children>
       <ScrollPane focusTraversable="false" hbarPolicy="NEVER" layoutX="20.0" layoutY="41.0" prefHeight="670.0" prefWidth="660.0">
          <content>
-            <VBox fx:id="vbox" alignment="TOP_CENTER" prefHeight="668.0" prefWidth="658.0" style="-fx-background-color: #D2CECE;" />
+            <VBox fx:id="vbox" alignment="TOP_RIGHT" prefHeight="668.0" prefWidth="658.0" style="-fx-background-color: white;" />
          </content>
       </ScrollPane>
-      <TextField fx:id="txtMessage" focusTraversable="false" layoutX="20.0" layoutY="740.0" prefHeight="40.0" prefWidth="570.0" promptText="Type a message">
+      <TextField fx:id="txtMessage" focusTraversable="false" layoutX="21.0" layoutY="740.0" prefHeight="40.0" prefWidth="570.0" promptText="Type a message">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
-      <Button focusTraversable="false" layoutX="610.0" layoutY="740.0" mnemonicParsing="false" onAction="#btnSendOnAction" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: blue;" text="Send" textFill="WHITE">
+      <Button focusTraversable="false" layoutX="611.0" layoutY="740.0" mnemonicParsing="false" onAction="#btnSendOnAction" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: blue;" text="Send" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button focusTraversable="false" layoutX="540.0" layoutY="745.0" mnemonicParsing="false" onAction="#btnGalleryOnAction" prefHeight="30.0" prefWidth="35.0">
+      <Button focusTraversable="false" layoutX="541.0" layoutY="745.0" mnemonicParsing="false" onAction="#btnGalleryOnAction" prefHeight="30.0" prefWidth="35.0">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                <image>

@@ -3,8 +3,10 @@ package lk.ijse.group_chat_app.controller;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -80,7 +82,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
 
             }
         } catch ( IOException e ) {
-            e.printStackTrace ();
+            shutdown ();
         }
     }
 
@@ -105,17 +107,50 @@ public class ChatRoomFormController implements Runnable, Initializable {
 
     public void setTextToVbox(String message) {
         Platform.runLater ( ( ) -> {
-            TextFlow text = new TextFlow ( new Text ( message ) );
+            String sender = null;
+            String msg = null;
 
             if ( message.startsWith ( username ) ) {
-                text.setTextAlignment ( TextAlignment.RIGHT );
+                String[] split = message.split ( ":" );
+                sender = "Me";
+                msg = split[1];
             } else {
-                text.setTextAlignment ( TextAlignment.LEFT );
+                String[] split = message.split ( ":" );
+                sender = split[0];
+                msg = split[1];
             }
 
-            vbox.getChildren ( ).add ( text );
+            if ( !sender.equals ( "Me" ) ) {
+                setOtherMessage ( sender, msg );
+            } else {
+                setMyMessage ( msg );
+            }
 
         } );
+    }
+
+    public void setOtherMessage ( String sender, String message) {
+        try {
+            FXMLLoader loader = new FXMLLoader ( ChatRoomFormController.class.getResource ( "/view/textOtherMessageForm.fxml" ) );
+            Parent root = loader.load ( );
+            TextOtherMessageFormController controller = loader.getController ( );
+            controller.setData ( sender, message );
+            vbox.getChildren ( ).add ( root );
+        } catch ( IOException e ) {
+            e.printStackTrace ();
+        }
+    }
+
+    public void setMyMessage (String message) {
+        try {
+            FXMLLoader loader = new FXMLLoader ( ChatRoomFormController.class.getResource ( "/view/textMyMessageForm.fxml" ) );
+            Parent root = loader.load ( );
+            TextMyMessageFormController controller = loader.getController ( );
+            controller.setData ( message );
+            vbox.getChildren ( ).add ( root );
+        } catch ( IOException e ) {
+            e.printStackTrace ();
+        }
     }
 
     public void setImgToVbox( String sender, byte[] imageData ) {
