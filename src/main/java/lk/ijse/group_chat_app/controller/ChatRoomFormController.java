@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -26,6 +27,8 @@ import java.nio.file.Files;
 import java.util.ResourceBundle;
 
 public class ChatRoomFormController implements Runnable, Initializable {
+    @FXML
+    public AnchorPane emojiPane;
 
     @FXML
     private VBox vbox;
@@ -45,8 +48,11 @@ public class ChatRoomFormController implements Runnable, Initializable {
 
     private ChatRoomFormController client;
 
+    private boolean emojiPaneVisible;
+
     public ChatRoomFormController() {
         client = this;
+        emojiPaneVisible = false;
     }
 
     @Override
@@ -189,6 +195,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
     @FXML
     void btnSendOnAction(ActionEvent event) {
         try {
+            emojiPane.setVisible ( false );
             outputHandler.handleTextOutput ( txtMessage.getText () );
             txtMessage.clear ();
         } catch ( IOException e ) {
@@ -222,8 +229,38 @@ public class ChatRoomFormController implements Runnable, Initializable {
         }
     }
 
+    @FXML
+    public void btnEmojiOnAction ( ActionEvent actionEvent ) {
+        if ( !emojiPaneVisible ) {
+            emojiPaneVisible = true;
+            emojiPane.setVisible ( true );
+        } else {
+            emojiPaneVisible = false;
+            emojiPane.setVisible ( false );
+        }
+    }
+
+    public void setEmojiToTxt (String unicode) {
+        txtMessage.appendText ( unicode );
+    }
+
+    public void loadEmojiPane () {
+        try {
+            emojiPane.getChildren().clear();
+            FXMLLoader loader = new FXMLLoader ( ChatRoomFormController.class.getResource ( "/view/emojiPaneForm.fxml" ) );
+            Parent root = loader.load ( );
+            EmojiPaneFormController controller = loader.getController ( );
+            controller.setController ( client );
+            emojiPane.getChildren ().add ( root );
+        } catch ( IOException e ) {
+            e.printStackTrace ();
+        }
+    }
+
     @Override
     public void initialize ( URL url, ResourceBundle resourceBundle ) {
+        loadEmojiPane ();
+
         new Thread ( () -> {
             client.run ();
         } ).start ();

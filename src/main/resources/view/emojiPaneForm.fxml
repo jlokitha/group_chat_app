@@ -1,16 +1,193 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.group_chat_app.controller.EmojiPaneFormController">
+<AnchorPane prefHeight="291.0" prefWidth="312.0" style="-fx-background-image: #FFFFFF; -fx-border-color: #727374; -fx-border-width: 2;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.group_chat_app.controller.EmojiPaneFormController">
    <children>
-      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="102.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../asset/Smiling%20Face%20with%20Open%20Mouth.png" />
-         </image>
-      </ImageView>
+      <VBox layoutX="10.0" layoutY="10.0" prefHeight="271.0" prefWidth="293.0" spacing="10.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="355.0" spacing="10.0">
+               <children>
+                  <Label fx:id="lbl1" onMouseClicked="#lbl1OnMouseClicked" prefHeight="50.0" prefWidth="50.0">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                     <padding>
+                        <Insets left="6.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lbl2" layoutX="10.0" layoutY="15.0" onMouseClicked="#lbl2OnMouseClicked" prefHeight="50.0" prefWidth="50.0">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                     <padding>
+                        <Insets left="6.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lbl3" layoutX="60.0" layoutY="15.0" onMouseClicked="#lbl3OnMouseClicked" prefHeight="50.0" prefWidth="50.0">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                     <padding>
+                        <Insets left="6.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lbl4" layoutX="110.0" layoutY="15.0" onMouseClicked="#lbl4OnMouseClicked" prefHeight="50.0" prefWidth="50.0">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                     <padding>
+                        <Insets left="6.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lbl5" layoutX="160.0" layoutY="15.0" onMouseClicked="#lbl5OnMouseClicked" prefHeight="50.0" prefWidth="50.0">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                     <padding>
+                        <Insets left="6.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="60.0" prefWidth="355.0" spacing="10.0">
+               <children>
+                  <Label fx:id="lbl6" onMouseClicked="#lbl6OnMouseClicked" prefHeight="50.0" prefWidth="50.0">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                     <padding>
+                        <Insets left="6.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lbl7" layoutX="10.0" layoutY="15.0" onMouseClicked="#lbl7OnMouseClicked" prefHeight="50.0" prefWidth="50.0">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                     <padding>
+                        <Insets left="6.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lbl8" layoutX="60.0" layoutY="15.0" onMouseClicked="#lbl8OnMouseClicked" prefHeight="50.0" prefWidth="50.0">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                     <padding>
+                        <Insets left="6.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lbl9" layoutX="110.0" layoutY="15.0" onMouseClicked="#lbl9OnMouseClicked" prefHeight="50.0" prefWidth="50.0">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                     <padding>
+                        <Insets left="6.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lbl10" layoutX="160.0" layoutY="15.0" onMouseClicked="#lbl10OnMouseClicked" prefHeight="50.0" prefWidth="50.0">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                     <padding>
+                        <Insets left="6.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="80.0" prefHeight="60.0" prefWidth="355.0" spacing="10.0">
+               <children>
+                  <Label fx:id="lbl11" onMouseClicked="#lbl11OnMouseClicked" prefHeight="50.0" prefWidth="50.0">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                     <padding>
+                        <Insets left="6.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lbl12" layoutX="10.0" layoutY="15.0" onMouseClicked="#lbl12OnMouseClicked" prefHeight="50.0" prefWidth="50.0">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                     <padding>
+                        <Insets left="6.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lbl13" layoutX="60.0" layoutY="15.0" onMouseClicked="#lbl13OnMouseClicked" prefHeight="50.0" prefWidth="50.0">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                     <padding>
+                        <Insets left="6.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lbl14" layoutX="110.0" layoutY="15.0" onMouseClicked="#lbl14OnMouseClicked" prefHeight="50.0" prefWidth="50.0">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                     <padding>
+                        <Insets left="6.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lbl15" layoutX="160.0" layoutY="15.0" onMouseClicked="#lbl15OnMouseClicked" prefHeight="50.0" prefWidth="50.0">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                     <padding>
+                        <Insets left="6.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="150.0" prefHeight="60.0" prefWidth="355.0" spacing="10.0">
+               <children>
+                  <Label fx:id="lbl16" onMouseClicked="#lbl16OnMouseClicked" prefHeight="50.0" prefWidth="50.0">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                     <padding>
+                        <Insets left="6.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lbl17" layoutX="10.0" layoutY="15.0" onMouseClicked="#lbl17OnMouseClicked" prefHeight="50.0" prefWidth="50.0">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                     <padding>
+                        <Insets left="6.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lbl18" layoutX="60.0" layoutY="15.0" onMouseClicked="#lbl18OnMouseClicked" prefHeight="50.0" prefWidth="50.0">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                     <padding>
+                        <Insets left="6.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lbl19" layoutX="110.0" layoutY="15.0" onMouseClicked="#lbl19OnMouseClicked" prefHeight="50.0" prefWidth="50.0">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                     <padding>
+                        <Insets left="6.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lbl20" layoutX="160.0" layoutY="15.0" onMouseClicked="#lbl20OnMouseClicked" prefHeight="50.0" prefWidth="50.0">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                     <padding>
+                        <Insets left="6.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
