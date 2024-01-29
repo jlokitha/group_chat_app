@@ -37,8 +37,10 @@ public class ConnectionHandler implements Runnable {
                     shutdown ();
 
                 } else if ( message.startsWith ( "/txt" ) ){
+                    String msg = in.readUTF ();
+                    String time = in.readUTF ();
 
-                    Server.getServer ().broadcastText ( username + ":" + in.readUTF () );
+                    Server.getServer ().broadcastText ( username + ":" + msg + ":" + time );
 
                 } else if ( message.startsWith ( "/img" ) ) {
 
@@ -62,6 +64,7 @@ public class ConnectionHandler implements Runnable {
 
             out.writeUTF ( message );
             out.flush ();
+
         } catch ( IOException e ) {
             e.printStackTrace ();
         }

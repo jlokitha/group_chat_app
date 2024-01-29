@@ -9,12 +9,15 @@ public class TextOtherMessageFormController {
     public Label lblName;
 
     @FXML
-    public Text txtMessage;
+    public Label lblMessage;
 
-    public void setData(String sender, String message) {
+    @FXML
+    public Label lblTime;
+
+    public void setData(String sender, String message, String time) {
         if (sender != null && message != null) {
             lblName.setText ( sender );
-            txtMessage.setText ( message );
+            lblMessage.setText ( message );
         }
     }
 }

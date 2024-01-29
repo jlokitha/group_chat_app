@@ -2,15 +2,18 @@ package lk.ijse.group_chat_app.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.text.Text;
 
 public class TextMyMessageFormController {
     @FXML
-    public Text txtMessage;
+    public Label lblMessage;
 
-    public void setData( String message ) {
+    @FXML
+    public Label lblTime;
+
+    public void setData( String message, String time ) {
         if ( message != null ) {
-            txtMessage.setText ( message );
+            lblMessage.setText ( message );
+            lblTime.setText ( time );
         }
     }
 }

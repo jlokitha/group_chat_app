@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,11 +25,15 @@ import java.io.*;
 import java.net.Socket;
 import java.net.URL;
 import java.nio.file.Files;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class ChatRoomFormController implements Runnable, Initializable {
     @FXML
     public AnchorPane emojiPane;
+
+    @FXML
+    public ScrollPane scrollPane;
 
     @FXML
     private VBox vbox;
@@ -64,7 +69,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
 
             outputHandler = new OutputHandler ( out );
 
-            outputHandler.handleTextOutput ( "Username " + username );
+            outputHandler.handleTextOutput ( "Username " + username, "" );
 
             String message;
 
@@ -115,45 +120,51 @@ public class ChatRoomFormController implements Runnable, Initializable {
         Platform.runLater ( ( ) -> {
             String sender = null;
             String msg = null;
+            String time = "null";
 
             if ( message.startsWith ( username ) ) {
                 String[] split = message.split ( ":" );
                 sender = "Me";
                 msg = split[1];
+//                time = split[2];
+
             } else {
                 String[] split = message.split ( ":" );
                 sender = split[0];
                 msg = split[1];
+//                time = split[2];
             }
 
             if ( !sender.equals ( "Me" ) ) {
-                setOtherMessage ( sender, msg );
+                setOtherMessage ( sender, msg, time );
             } else {
-                setMyMessage ( msg );
+                setMyMessage ( msg, time );
             }
 
         } );
     }
 
-    public void setOtherMessage ( String sender, String message) {
+    public void setOtherMessage ( String sender, String message, String time ) {
         try {
             FXMLLoader loader = new FXMLLoader ( ChatRoomFormController.class.getResource ( "/view/textOtherMessageForm.fxml" ) );
             Parent root = loader.load ( );
             TextOtherMessageFormController controller = loader.getController ( );
-            controller.setData ( sender, message );
+            controller.setData ( sender, message, time );
             vbox.getChildren ( ).add ( root );
+            scrollToBottom ();
         } catch ( IOException e ) {
             e.printStackTrace ();
         }
     }
 
-    public void setMyMessage (String message) {
+    public void setMyMessage (String message, String time) {
         try {
             FXMLLoader loader = new FXMLLoader ( ChatRoomFormController.class.getResource ( "/view/textMyMessageForm.fxml" ) );
             Parent root = loader.load ( );
             TextMyMessageFormController controller = loader.getController ( );
-            controller.setData ( message );
+            controller.setData ( message, time );
             vbox.getChildren ( ).add ( root );
+            scrollToBottom ();
         } catch ( IOException e ) {
             e.printStackTrace ();
         }
@@ -189,6 +200,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
                 vbox.setAlignment ( Pos.TOP_RIGHT );
                 vbox.getChildren ().add ( imageView );
             }
+            scrollToBottom ();
         });
     }
 
@@ -196,7 +208,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
     void btnSendOnAction(ActionEvent event) {
         try {
             emojiPane.setVisible ( false );
-            outputHandler.handleTextOutput ( txtMessage.getText () );
+            outputHandler.handleTextOutput ( txtMessage.getText (), String.valueOf ( LocalTime.now () ) );
             txtMessage.clear ();
         } catch ( IOException e ) {
             e.printStackTrace ();
@@ -217,7 +229,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
 
     public void shutdown() {
         try {
-            outputHandler.handleTextOutput ( "Shutdown" );
+            outputHandler.handleTextOutput ( "Shutdown", "" );
             in.close ();
             out.close ();
 
@@ -255,6 +267,12 @@ public class ChatRoomFormController implements Runnable, Initializable {
         } catch ( IOException e ) {
             e.printStackTrace ();
         }
+    }
+
+    private void scrollToBottom() {
+        Platform.runLater(() -> {
+            scrollPane.setVvalue(0);
+        });
     }
 
     @Override

@@ -10,7 +10,7 @@ public class OutputHandler {
         this.out = out;
     }
 
-    public void handleTextOutput ( String message) throws IOException {
+    public void handleTextOutput ( String message, String time) throws IOException {
         if ( !message.startsWith ( "Username" ) && !message.startsWith ( "Shutdown" )) {
 
             out.writeUTF ( "/txt" );
@@ -18,6 +18,9 @@ public class OutputHandler {
 
             out.writeUTF ( message );
             out.flush ( );
+
+            out.writeUTF ( time );
+            out.flush ();
 
         } else {
 
