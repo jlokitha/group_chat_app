@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="437.0" maxWidth="652.0" prefWidth="652.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.group_chat_app.controller.GreyImagePaneFormController">
+   <children>
+      <Pane layoutX="6.0" maxHeight="437.0" maxWidth="330.0" style="-fx-background-color: #808080; -fx-background-radius: 0 15 15 15;">
+         <children>
+            <VBox fx:id="vbox" layoutX="15.0" layoutY="5.0" prefHeight="10.0" prefWidth="424.0" spacing="5.0">
+               <padding>
+                  <Insets bottom="4.0" right="11.0" top="7.0" />
+               </padding>
+            </VBox>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

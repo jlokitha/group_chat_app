@@ -7,20 +7,13 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="800.0" prefWidth="700.0" style="-fx-background-color: #D2CECE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.group_chat_app.controller.ChatRoomFormController">
    <children>
-      <ScrollPane fx:id="scrollPane" focusTraversable="false" hbarPolicy="NEVER" layoutX="20.0" layoutY="41.0" prefHeight="670.0" prefWidth="676.0">
-         <content>
-            <VBox fx:id="vbox" alignment="TOP_RIGHT" fillWidth="false" prefHeight="668.0" prefWidth="658.0" spacing="5.0" style="-fx-background-color: white;">
-               <padding>
-                  <Insets bottom="6.0" right="6.0" top="6.0" />
-               </padding></VBox>
-         </content>
-      </ScrollPane>
       <TextField fx:id="txtMessage" focusTraversable="false" layoutX="47.0" layoutY="740.0" prefHeight="40.0" prefWidth="500.0" promptText="Type a message">
          <font>
             <Font size="15.0" />
@@ -58,7 +51,20 @@
             </ImageView>
          </graphic>
       </Button>
+      <Pane layoutX="20.0" layoutY="41.0" prefHeight="670.0" prefWidth="676.0">
+         <children>
+            <ScrollPane fx:id="scrollPane" focusTraversable="false" hbarPolicy="NEVER" prefHeight="670.0" prefWidth="676.0" vbarPolicy="ALWAYS">
+               <content>
+                  <VBox fx:id="vbox" alignment="TOP_RIGHT" fillWidth="false" prefHeight="668.0" prefWidth="658.0" spacing="5.0" style="-fx-background-color: white;">
+                     <padding>
+                        <Insets bottom="6.0" right="6.0" top="6.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d2cece" height="670.0" layoutX="660.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="16.0" />
+         </children>
+      </Pane>
       <AnchorPane fx:id="emojiPane" layoutX="21.0" layoutY="443.0" prefHeight="291.0" prefWidth="312.0" style="-fx-background-color: #FFFFFF;" visible="false" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d2cece" height="670.0" layoutX="680.0" layoutY="41.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="16.0" />
    </children>
 </AnchorPane>

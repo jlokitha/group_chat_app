@@ -36,18 +36,26 @@ public class Server implements Runnable {
         }
     }
 
-    public void broadcastText ( String message) {
+    public void broadcastInfo ( String sender, String message ) {
         for (ConnectionHandler client : connectionList) {
             if ( client != null ) {
-                client.sendMessage ( message );
+                client.sendInfo ( sender, message );
             }
         }
     }
 
-    public void broadcastImage ( String sender, byte[] imageData ) {
+    public void broadcastText ( String sender, String message, String time) {
         for (ConnectionHandler client : connectionList) {
             if ( client != null ) {
-                client.sendImage ( sender, imageData );
+                client.sendMessage ( sender, message, time );
+            }
+        }
+    }
+
+    public void broadcastImage ( String sender, byte[] imageData, String time ) {
+        for (ConnectionHandler client : connectionList) {
+            if ( client != null ) {
+                client.sendImage ( sender, imageData, time );
             }
         }
     }

@@ -13,19 +13,19 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import lk.ijse.group_chat_app.OutputHandler;
 
 import java.io.*;
 import java.net.Socket;
 import java.net.URL;
 import java.nio.file.Files;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class ChatRoomFormController implements Runnable, Initializable {
@@ -49,8 +49,6 @@ public class ChatRoomFormController implements Runnable, Initializable {
 
     public static String username;
 
-    OutputHandler outputHandler;
-
     private ChatRoomFormController client;
 
     private boolean emojiPaneVisible;
@@ -67,28 +65,40 @@ public class ChatRoomFormController implements Runnable, Initializable {
             in = new DataInputStream ( new BufferedInputStream ( remoteSocket.getInputStream ( ) ) );
             out = new DataOutputStream ( remoteSocket.getOutputStream ( ) );
 
-            outputHandler = new OutputHandler ( out );
-
-            outputHandler.handleTextOutput ( "Username " + username, "" );
+            handleTextOutput ( ("Username " + username), "" );
 
             String message;
 
             while ( ( message = in.readUTF ( ) ) != null ) {
 
-                if ( message.equals ( "/txt" ) ) {
+                 if ( message.equals ( "/info" ) ) {
 
-                    setTextToVbox ( in.readUTF () );
+                     String sender = in.readUTF ();
+                     sender = (sender.equals ( username )) ? "you" : sender;
+                     String msg = in.readUTF ();
+
+                     setInfoToVbox ( sender, msg );
+
+                 } else if ( message.equals ( "/txt" ) ) {
+
+                    String sender = in.readUTF ();
+                    String msg = in.readUTF ();
+                    String time = in.readUTF ();
+
+                    setTextToVbox ( sender, msg, time );
 
                 } else if ( message.equals ( "/img" ) ) {
 
-                    int imageLength = in.readInt ( );
-
                     String sender = in.readUTF ();
+
+                    int imageLength = in.readInt ( );
 
                     byte[] imageData = new byte[imageLength];
                     in.readFully ( imageData );
 
-                    setImgToVbox ( sender, imageData );
+                    String time = in.readUTF ();
+
+                    setImgToVbox ( sender, imageData, time );
                 }
 
             }
@@ -112,33 +122,30 @@ public class ChatRoomFormController implements Runnable, Initializable {
 
             byte[] imageBytes = Files.readAllBytes(file.toPath());
 
-            outputHandler.handleImageOutput ( imageBytes );
+            handleImageOutput ( imageBytes, LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")) );
         }
     }
 
-    public void setTextToVbox(String message) {
+    public void setInfoToVbox( String sender, String message) {
         Platform.runLater ( ( ) -> {
-            String sender = null;
-            String msg = null;
-            String time = "null";
 
-            if ( message.startsWith ( username ) ) {
-                String[] split = message.split ( ":" );
-                sender = "Me";
-                msg = split[1];
-//                time = split[2];
+            TextFlow textFlow = new TextFlow ( new Text ( sender + " " + message ) );
+            HBox hBox = new HBox ( );
+            hBox.getChildren ().add ( textFlow );
+            hBox.setAlignment ( Pos.CENTER );
+            hBox.setPrefWidth ( 652 );
+            vbox.getChildren ().add ( hBox );
 
+        } );
+    }
+
+    public void setTextToVbox(String sender, String message, String time) {
+        Platform.runLater ( ( ) -> {
+
+            if ( !sender.equals ( username ) ) {
+                setOtherMessage ( sender, message, time );
             } else {
-                String[] split = message.split ( ":" );
-                sender = split[0];
-                msg = split[1];
-//                time = split[2];
-            }
-
-            if ( !sender.equals ( "Me" ) ) {
-                setOtherMessage ( sender, msg, time );
-            } else {
-                setMyMessage ( msg, time );
+                setMyMessage ( message, time );
             }
 
         } );
@@ -146,12 +153,12 @@ public class ChatRoomFormController implements Runnable, Initializable {
 
     public void setOtherMessage ( String sender, String message, String time ) {
         try {
-            FXMLLoader loader = new FXMLLoader ( ChatRoomFormController.class.getResource ( "/view/textOtherMessageForm.fxml" ) );
+            FXMLLoader loader = new FXMLLoader ( ChatRoomFormController.class.getResource ( "/view/greyTextBubbleForm.fxml" ) );
             Parent root = loader.load ( );
-            TextOtherMessageFormController controller = loader.getController ( );
+            GreyTextBubbleFormController controller = loader.getController ( );
             controller.setData ( sender, message, time );
             vbox.getChildren ( ).add ( root );
-            scrollToBottom ();
+            autoScrollDown ();
         } catch ( IOException e ) {
             e.printStackTrace ();
         }
@@ -159,48 +166,43 @@ public class ChatRoomFormController implements Runnable, Initializable {
 
     public void setMyMessage (String message, String time) {
         try {
-            FXMLLoader loader = new FXMLLoader ( ChatRoomFormController.class.getResource ( "/view/textMyMessageForm.fxml" ) );
+            FXMLLoader loader = new FXMLLoader ( ChatRoomFormController.class.getResource ( "/view/blueTextBubbleForm.fxml" ) );
             Parent root = loader.load ( );
-            TextMyMessageFormController controller = loader.getController ( );
+            BlueTextBubbleFormController controller = loader.getController ( );
             controller.setData ( message, time );
             vbox.getChildren ( ).add ( root );
-            scrollToBottom ();
+            autoScrollDown ();
         } catch ( IOException e ) {
             e.printStackTrace ();
         }
     }
 
-    public void setImgToVbox( String sender, byte[] imageData ) {
+    public void setImgToVbox( String sender, byte[] imageData, String time ) {
         Platform.runLater(() -> {
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(imageData);
-            Image image = new Image(inputStream);
 
-            ImageView imageView = new ImageView(image);
-            imageView.setFitWidth(400);
-            imageView.setFitHeight(400);
-            imageView.setPreserveRatio(true);
+            try {
+                if ( !sender.equals ( username ) ) {
 
-            if ( !sender.startsWith ( username ) ) {
+                    FXMLLoader loader = new FXMLLoader ( ChatRoomFormController.class.getResource ( "/view/greyImagePaneForm.fxml" ) );
+                    Parent root = loader.load ( );
+                    GreyImagePaneFormController controller = loader.getController ( );
+                    controller.setData ( sender, new Image ( new ByteArrayInputStream ( imageData ) ), time );
+                    vbox.getChildren ( ).add ( root );
+                    autoScrollDown ( );
 
-                TextFlow text = new TextFlow ( new Text ( sender ) );
-                text.setTextAlignment ( TextAlignment.LEFT );
-                vbox.getChildren ().add ( text );
+                } else {
 
-                vbox.setAlignment ( Pos.TOP_LEFT );
-                imageView.setX ( 0 );
-                imageView.setY ( 0 );
-                vbox.getChildren ( ).add ( imageView );
-
-            } else {
-
-                TextFlow text = new TextFlow ( new Text ( "Me" ) );
-                text.setTextAlignment ( TextAlignment.RIGHT );
-                vbox.getChildren ().add ( text );
-
-                vbox.setAlignment ( Pos.TOP_RIGHT );
-                vbox.getChildren ().add ( imageView );
+                    FXMLLoader loader = new FXMLLoader ( ChatRoomFormController.class.getResource ( "/view/blueImagePaneForm.fxml" ) );
+                    Parent root = loader.load ( );
+                    BlueImagePaneFormController controller = loader.getController ( );
+                    controller.setData ( new Image ( new ByteArrayInputStream ( imageData ) ), time );
+                    vbox.getChildren ( ).add ( root );
+                    autoScrollDown ( );
+                }
+            } catch ( IOException e ) {
+                e.printStackTrace ();
             }
-            scrollToBottom ();
+
         });
     }
 
@@ -208,7 +210,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
     void btnSendOnAction(ActionEvent event) {
         try {
             emojiPane.setVisible ( false );
-            outputHandler.handleTextOutput ( txtMessage.getText (), String.valueOf ( LocalTime.now () ) );
+            handleTextOutput ( txtMessage.getText (), LocalTime.now().format( DateTimeFormatter.ofPattern("HH:mm")) );
             txtMessage.clear ();
         } catch ( IOException e ) {
             e.printStackTrace ();
@@ -229,7 +231,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
 
     public void shutdown() {
         try {
-            outputHandler.handleTextOutput ( "Shutdown", "" );
+            handleTextOutput ( "Shutdown", "" );
             in.close ();
             out.close ();
 
@@ -269,15 +271,55 @@ public class ChatRoomFormController implements Runnable, Initializable {
         }
     }
 
-    private void scrollToBottom() {
-        Platform.runLater(() -> {
-            scrollPane.setVvalue(0);
+    public void handleTextOutput ( String message, String time) throws IOException {
+        if ( !message.startsWith ( "Username" ) && !message.startsWith ( "Shutdown" )) {
+
+            out.writeUTF ( "/txt" );
+            out.flush ( );
+
+            out.writeUTF ( message );
+            out.flush ( );
+
+            out.writeUTF ( time );
+            out.flush ();
+
+        } else {
+
+            out.writeUTF ( "/info" );
+            out.flush ();
+
+            out.writeUTF ( message );
+            out.flush ();
+
+        }
+    }
+
+    public void handleImageOutput ( byte[] imageBytes, String time) throws IOException {
+        out.writeUTF("/img");
+        out.flush();
+
+        out.writeInt(imageBytes.length);
+        out.flush ();
+
+        out.write(imageBytes);
+        out.flush();
+
+        out.writeUTF ( time );
+        out.flush ();
+    }
+
+    public void autoScrollDown () {
+        scrollPane.needsLayoutProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                scrollPane.setVvalue(1.0);
+            }
         });
     }
 
     @Override
     public void initialize ( URL url, ResourceBundle resourceBundle ) {
         loadEmojiPane ();
+        autoScrollDown ();
 
         new Thread ( () -> {
             client.run ();

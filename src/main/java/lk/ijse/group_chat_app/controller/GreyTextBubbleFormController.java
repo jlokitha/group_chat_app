@@ -2,9 +2,8 @@ package lk.ijse.group_chat_app.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.text.Text;
 
-public class TextOtherMessageFormController {
+public class GreyTextBubbleFormController {
     @FXML
     public Label lblName;
 
@@ -18,6 +17,7 @@ public class TextOtherMessageFormController {
         if (sender != null && message != null) {
             lblName.setText ( sender );
             lblMessage.setText ( message );
+            lblTime.setText ( time );
         }
     }
 }

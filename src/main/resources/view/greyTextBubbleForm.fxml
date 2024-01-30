@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="652.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="71.0" prefWidth="652.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.group_chat_app.controller.TextOtherMessageFormController">
+<AnchorPane maxHeight="-Infinity" maxWidth="652.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="71.0" prefWidth="652.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.group_chat_app.controller.GreyTextBubbleFormController">
    <children>
       <AnchorPane layoutX="6.0" maxWidth="600.0" style="-fx-background-color: #808080; -fx-background-radius: 0 15 15 15;">
          <children>
