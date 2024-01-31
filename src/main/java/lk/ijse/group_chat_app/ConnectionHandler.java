@@ -39,6 +39,7 @@ public class ConnectionHandler implements Runnable {
 
                     } else {
 
+                        Server.getServer ().removeConnectionHandler ( this );
                         Server.getServer ().broadcastInfo ( username, " left !" );
                         shutdown ();
 
@@ -68,7 +69,7 @@ public class ConnectionHandler implements Runnable {
         }
     }
 
-    public void sendInfo(String sender, String message ) {
+    public void sendInfo(String sender, String message, int onlineCount ) {
         try {
             out.writeUTF ( "/info" );
             out.flush ();
@@ -77,6 +78,9 @@ public class ConnectionHandler implements Runnable {
             out.flush ();
 
             out.writeUTF ( message );
+            out.flush ();
+
+            out.writeInt ( onlineCount );
             out.flush ();
 
         } catch ( IOException e ) {

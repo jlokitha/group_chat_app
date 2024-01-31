@@ -39,7 +39,7 @@ public class Server implements Runnable {
     public void broadcastInfo ( String sender, String message ) {
         for (ConnectionHandler client : connectionList) {
             if ( client != null ) {
-                client.sendInfo ( sender, message );
+                client.sendInfo ( sender, message, connectionList.size () );
             }
         }
     }
@@ -58,6 +58,10 @@ public class Server implements Runnable {
                 client.sendImage ( sender, imageData, time );
             }
         }
+    }
+
+    public void removeConnectionHandler(ConnectionHandler connectionHandler) {
+        connectionList.remove(connectionHandler);
     }
 
     public static Server getServer() {

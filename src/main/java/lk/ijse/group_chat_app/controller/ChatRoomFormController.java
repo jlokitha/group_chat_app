@@ -7,11 +7,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -104,8 +105,10 @@ public class ChatRoomFormController implements Runnable, Initializable {
                      String sender = in.readUTF ();
                      sender = (sender.equals ( username )) ? "You" : sender;
                      String msg = in.readUTF ();
+                     int onlineCount = in.readInt ();
 
                      setInfoToVbox ( sender, msg );
+                     setOnlineCount ( onlineCount );
 
                  } else if ( message.equals ( "/txt" ) ) {
 
@@ -133,6 +136,12 @@ public class ChatRoomFormController implements Runnable, Initializable {
         } catch ( IOException e ) {
             shutdown ();
         }
+    }
+
+    private void setOnlineCount ( int onlineCount ) {
+        Platform.runLater ( () -> {
+            lblOnlineCount.setText ( onlineCount + " Online" );
+        } );
     }
 
     public void setInfoToVbox( String sender, String message) {
@@ -220,6 +229,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
     @FXML
     public void imgCloseOnMouseClicked ( MouseEvent mouseEvent ) {
         shutdown ();
+
         System.exit ( 0 );
     }
 
@@ -231,7 +241,12 @@ public class ChatRoomFormController implements Runnable, Initializable {
 
     public void shutdown() {
         try {
-            handleTextOutput ( "Shutdown", "" );
+            out.writeUTF ( "/info" );
+            out.flush ();
+
+            out.writeUTF ( "Shutdown" );
+            out.flush ();
+
             in.close ();
             out.close ();
 
@@ -262,7 +277,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
 
     public void handleTextOutput ( String message, String time ) {
         try {
-            if ( ! message.startsWith ( "Username" ) && ! message.startsWith ( "Shutdown" ) ) {
+            if ( ! message.startsWith ( "Username" ) ) {
 
 
                 out.writeUTF ( "/txt" );
@@ -399,6 +414,17 @@ public class ChatRoomFormController implements Runnable, Initializable {
 
     @FXML
     public void imgBackOnMouseClicked ( MouseEvent mouseEvent ) {
+        try {
+            shutdown ();
+
+            Parent parent = FXMLLoader.load ( this.getClass ().getResource ( "/view/loginForm.fxml" ) );
+            Stage stage = (Stage) ((Node) mouseEvent.getSource ()).getScene ().getWindow ();
+            stage.setScene ( new Scene ( parent ) );
+            stage.centerOnScreen ();
+            stage.show ();
+        } catch ( IOException e ) {
+            e.printStackTrace ();
+        }
     }
 
     @Override
