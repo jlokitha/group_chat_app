@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="56.0" prefWidth="21.0" style="-fx-background-color: #8AFFB6; -fx-background-radius: 15 15 15 0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.group_chat_app.controller.GreenTextBubbleFormController">
+   <children>
+      <Label fx:id="lblMessage" alignment="CENTER_RIGHT" focusTraversable="false" layoutX="11.0" layoutY="8.0" nodeOrientation="RIGHT_TO_LEFT" textAlignment="JUSTIFY" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTime" focusTraversable="false" layoutX="11.0" layoutY="33.0" nodeOrientation="RIGHT_TO_LEFT" textAlignment="JUSTIFY" textFill="#727374" />
+   </children>
+   <padding>
+      <Insets bottom="6.0" left="10.0" />
+   </padding>
+</AnchorPane>

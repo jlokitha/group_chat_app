@@ -3,7 +3,7 @@ package lk.ijse.group_chat_app.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class BlueTextBubbleFormController {
+public class GreenTextBubbleFormController {
     @FXML
     public Label lblMessage;
 

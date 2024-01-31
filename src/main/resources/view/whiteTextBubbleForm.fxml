@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="962.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="74.0" prefWidth="962.0" style="-fx-background-color: #E8E7E7;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.group_chat_app.controller.WhiteTextBubbleFormController">
+   <children>
+      <AnchorPane maxWidth="600.0" prefHeight="74.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 0 15 15 15;">
+         <children>
+            <Label fx:id="lblName" alignment="CENTER_LEFT" focusTraversable="false" layoutX="11.0" layoutY="5.0" maxWidth="200.0" textAlignment="JUSTIFY" textFill="#2c2cd4">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblMessage" alignment="CENTER_LEFT" focusTraversable="false" layoutX="11.0" layoutY="29.0" maxWidth="600.0" textAlignment="JUSTIFY" wrapText="true">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblTime" alignment="CENTER_RIGHT" focusTraversable="false" layoutX="11.0" layoutY="55.0" nodeOrientation="RIGHT_TO_LEFT" textAlignment="JUSTIFY" textFill="#727374" />
+         </children>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </AnchorPane>
+   </children>
+</AnchorPane>

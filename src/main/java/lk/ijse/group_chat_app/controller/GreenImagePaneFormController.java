@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class BlueImagePaneFormController {
+public class GreenImagePaneFormController {
 
     @FXML
     public VBox vbox;

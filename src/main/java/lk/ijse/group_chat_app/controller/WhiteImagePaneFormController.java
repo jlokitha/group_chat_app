@@ -2,7 +2,6 @@ package lk.ijse.group_chat_app.controller;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,7 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class GreyImagePaneFormController {
+public class WhiteImagePaneFormController {
 
     @FXML
     public VBox vbox;

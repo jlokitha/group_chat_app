@@ -20,7 +20,7 @@
                <content>
                   <VBox fx:id="vbox" alignment="TOP_RIGHT" fillWidth="false" prefHeight="670.0" prefWidth="982.0" spacing="5.0" style="-fx-background-color: #E8E7E7;">
                      <padding>
-                        <Insets bottom="6.0" right="6.0" top="6.0" />
+                        <Insets bottom="20.0" left="20.0" top="20.0" />
                      </padding>
                   </VBox>
                </content>

@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
@@ -90,7 +91,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
                  if ( message.equals ( "/info" ) ) {
 
                      String sender = in.readUTF ();
-                     sender = (sender.equals ( username )) ? "you" : sender;
+                     sender = (sender.equals ( username )) ? "You" : sender;
                      String msg = in.readUTF ();
 
                      setInfoToVbox ( sender, msg );
@@ -126,11 +127,13 @@ public class ChatRoomFormController implements Runnable, Initializable {
     public void setInfoToVbox( String sender, String message) {
         Platform.runLater ( ( ) -> {
 
-            TextFlow textFlow = new TextFlow ( new Text ( sender + " " + message ) );
+            Text text = new Text ( sender + " " + message );
+            text.setFont ( Font.font ( 15 ) );
+            TextFlow textFlow = new TextFlow ( text );
             HBox hBox = new HBox ( );
             hBox.getChildren ().add ( textFlow );
             hBox.setAlignment ( Pos.CENTER );
-            hBox.setPrefWidth ( 652 );
+            hBox.setPrefWidth ( 962 );
             vbox.getChildren ().add ( hBox );
 
         } );
@@ -150,9 +153,9 @@ public class ChatRoomFormController implements Runnable, Initializable {
 
     public void setOtherMessage ( String sender, String message, String time ) {
         try {
-            FXMLLoader loader = new FXMLLoader ( ChatRoomFormController.class.getResource ( "/view/greyTextBubbleForm.fxml" ) );
+            FXMLLoader loader = new FXMLLoader ( ChatRoomFormController.class.getResource ( "/view/whiteTextBubbleForm.fxml" ) );
             Parent root = loader.load ( );
-            GreyTextBubbleFormController controller = loader.getController ( );
+            WhiteTextBubbleFormController controller = loader.getController ( );
             controller.setData ( sender, message, time );
             vbox.getChildren ( ).add ( root );
             autoScrollDown ();
@@ -163,9 +166,9 @@ public class ChatRoomFormController implements Runnable, Initializable {
 
     public void setMyMessage (String message, String time) {
         try {
-            FXMLLoader loader = new FXMLLoader ( ChatRoomFormController.class.getResource ( "/view/blueTextBubbleForm.fxml" ) );
+            FXMLLoader loader = new FXMLLoader ( ChatRoomFormController.class.getResource ( "/view/greenTextBubbleForm.fxml" ) );
             Parent root = loader.load ( );
-            BlueTextBubbleFormController controller = loader.getController ( );
+            GreenTextBubbleFormController controller = loader.getController ( );
             controller.setData ( message, time );
             vbox.getChildren ( ).add ( root );
             autoScrollDown ();
@@ -180,18 +183,18 @@ public class ChatRoomFormController implements Runnable, Initializable {
             try {
                 if ( !sender.equals ( username ) ) {
 
-                    FXMLLoader loader = new FXMLLoader ( ChatRoomFormController.class.getResource ( "/view/greyImagePaneForm.fxml" ) );
+                    FXMLLoader loader = new FXMLLoader ( ChatRoomFormController.class.getResource ( "/view/whiteImagePaneForm.fxml" ) );
                     Parent root = loader.load ( );
-                    GreyImagePaneFormController controller = loader.getController ( );
+                    WhiteImagePaneFormController controller = loader.getController ( );
                     controller.setData ( sender, new Image ( new ByteArrayInputStream ( imageData ) ), time );
                     vbox.getChildren ( ).add ( root );
                     autoScrollDown ( );
 
                 } else {
 
-                    FXMLLoader loader = new FXMLLoader ( ChatRoomFormController.class.getResource ( "/view/blueImagePaneForm.fxml" ) );
+                    FXMLLoader loader = new FXMLLoader ( ChatRoomFormController.class.getResource ( "/view/greenImagePaneForm.fxml" ) );
                     Parent root = loader.load ( );
-                    BlueImagePaneFormController controller = loader.getController ( );
+                    GreenImagePaneFormController controller = loader.getController ( );
                     controller.setData ( new Image ( new ByteArrayInputStream ( imageData ) ), time );
                     vbox.getChildren ( ).add ( root );
                     autoScrollDown ( );

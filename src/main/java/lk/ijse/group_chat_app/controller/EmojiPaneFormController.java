@@ -147,33 +147,33 @@ public class EmojiPaneFormController implements Initializable {
 
     @FXML
     void lbl15OnMouseClicked(javafx.scene.input.MouseEvent event) {
-        controller.setEmojiToTxt ( "\uD83D\uDC4B" );
+        controller.setEmojiToTxt ( "\uD83D\uDE30" );
     }
 
     @FXML
     void lbl16OnMouseClicked(javafx.scene.input.MouseEvent event) {
-        controller.setEmojiToTxt ( "\uD83D\uDC4D" );
+        controller.setEmojiToTxt ( "\uD83D\uDE2F" );
     }
 
     @FXML
     void lbl17OnMouseClicked(javafx.scene.input.MouseEvent event) {
-        controller.setEmojiToTxt ( "\uD83D\uDC4E" );
+        controller.setEmojiToTxt ( "\uD83D\uDE28" );
     }
 
     @FXML
     void lbl18OnMouseClicked(javafx.scene.input.MouseEvent event) {
-        controller.setEmojiToTxt ( "\uD83D\uDC4F" );
+        controller.setEmojiToTxt ( "\uD83D\uDE22" );
     }
 
     @FXML
     void lbl19OnMouseClicked(javafx.scene.input.MouseEvent event) {
-        controller.setEmojiToTxt ( "\uD83D\uDE4F" );
+        controller.setEmojiToTxt ( "\uD83D\uDC4D" );
     }
 
 
     @FXML
     void lbl20OnMouseClicked(javafx.scene.input.MouseEvent event) {
-        controller.setEmojiToTxt ( "\uD83D\uDC40" );
+        controller.setEmojiToTxt ( "\uD83D\uDC4E" );
     }
 
     @Override
@@ -192,11 +192,11 @@ public class EmojiPaneFormController implements Initializable {
         lbl12.setText ( "\uD83D\uDE2D" );
         lbl13.setText ( "\uD83D\uDE31" );
         lbl14.setText ( "\uD83D\uDE21" );
-        lbl15.setText ( "\uD83D\uDC4B" );
-        lbl16.setText ( "\uD83D\uDC4D" );
-        lbl17.setText ( "\uD83D\uDC4E" );
-        lbl18.setText ( "\uD83D\uDC4F" );
-        lbl19.setText ( "\uD83D\uDE4F" );
-        lbl20.setText ( "\uD83D\uDC40" );
+        lbl15.setText ( "\uD83D\uDE30" );
+        lbl16.setText ( "\uD83D\uDE2F" );
+        lbl17.setText ( "\uD83D\uDE28" );
+        lbl18.setText ( "\uD83D\uDE22" );
+        lbl19.setText ( "\uD83D\uDC4D" );
+        lbl20.setText ( "\uD83D\uDC4E" );
     }
 }
