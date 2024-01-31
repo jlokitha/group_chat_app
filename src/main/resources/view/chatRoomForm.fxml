@@ -48,12 +48,12 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="17.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="17.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../asset/profile.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblUser" layoutX="79.0" layoutY="53.0" text="Label" textFill="#727374">
+      <Label fx:id="lblUser" focusTraversable="false" layoutX="79.0" layoutY="55.0" text="Label" textFill="#727374">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
@@ -84,8 +84,8 @@
             <Font size="16.0" />
          </font>
       </JFXTextField>
-      <JFXButton layoutX="40.0" layoutY="795.0" onAction="#btnEmojiOnAction" onMouseEntered="#btnEmojiOnMouseEntered" onMouseExited="#btnEmojiOnMouseExited" prefHeight="50.0" prefWidth="50.0" text=" " />
-      <JFXButton layoutX="100.0" layoutY="795.0" onAction="#btnAttachOnAction" onMouseEntered="#btnAttachOnMouseEntered" onMouseExited="#btnAttachOnMouseExited" prefHeight="50.0" prefWidth="50.0" text=" " />
-      <JFXButton layoutX="889.0" layoutY="789.0" onAction="#btnSendOnAction" onMouseEntered="#btnSendOnMouseEntered" onMouseExited="#btnSendOnMouseExited" prefHeight="60.0" prefWidth="60.0" text=" " />
+      <JFXButton fx:id="btnEmoji" focusTraversable="false" layoutX="40.0" layoutY="795.0" onAction="#btnEmojiOnAction" onMouseEntered="#btnEmojiOnMouseEntered" onMouseExited="#btnEmojiOnMouseExited" prefHeight="50.0" prefWidth="50.0" text=" " />
+      <JFXButton fx:id="btnAttach" focusTraversable="false" layoutX="100.0" layoutY="795.0" onAction="#btnAttachOnAction" onMouseEntered="#btnAttachOnMouseEntered" onMouseExited="#btnAttachOnMouseExited" prefHeight="50.0" prefWidth="50.0" text=" " />
+      <JFXButton fx:id="btnSend" focusTraversable="false" layoutX="889.0" layoutY="789.0" onAction="#btnSendOnAction" onMouseEntered="#btnSendOnMouseEntered" onMouseExited="#btnSendOnMouseExited" prefHeight="60.0" prefWidth="60.0" text=" " />
    </children>
 </AnchorPane>

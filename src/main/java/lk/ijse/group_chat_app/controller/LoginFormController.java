@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 public class LoginFormController {
     @FXML
@@ -19,15 +20,17 @@ public class LoginFormController {
 
     @FXML
     public void btnLoginOnAction ( ActionEvent event ) {
-        ChatRoomFormController.username = txtUserName.getText ();
-        try {
-            Parent parent = FXMLLoader.load ( this.getClass ().getResource ( "/view/chatRoomForm.fxml" ) );
-            Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
-            stage.setScene ( new Scene ( parent ) );
-            stage.centerOnScreen ();
-            stage.show ();
-        } catch ( IOException e ) {
-            e.printStackTrace ();
+        if ( validateUsername ( txtUserName.getText (  ) ) ) {
+            ChatRoomFormController.username = txtUserName.getText ();
+            try {
+                Parent parent = FXMLLoader.load ( this.getClass ().getResource ( "/view/chatRoomForm.fxml" ) );
+                Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
+                stage.setScene ( new Scene ( parent ) );
+                stage.centerOnScreen ();
+                stage.show ();
+            } catch ( IOException e ) {
+                e.printStackTrace ();
+            }
         }
     }
 
@@ -40,5 +43,9 @@ public class LoginFormController {
     public void imgMinimizeOnMouseClicked ( MouseEvent mouseEvent ) {
         Stage stage = (Stage)((ImageView)mouseEvent.getSource()).getScene().getWindow();
         stage.setIconified(true);
+    }
+
+    public boolean validateUsername (String username) {
+        return Pattern.matches ( "([a-zA-Z0-9]{3,})", username );
     }
 }

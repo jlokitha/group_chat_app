@@ -1,5 +1,6 @@
 package lk.ijse.group_chat_app.controller;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -51,6 +53,15 @@ public class ChatRoomFormController implements Runnable, Initializable {
 
     @FXML
     public ImageView imgAttatch;
+
+    @FXML
+    public JFXButton btnEmoji;
+
+    @FXML
+    public JFXButton btnSend;
+
+    @FXML
+    public JFXButton btnAttach;
 
     @FXML
     private VBox vbox;
@@ -365,8 +376,10 @@ public class ChatRoomFormController implements Runnable, Initializable {
 
     @FXML
     void btnSendOnAction(ActionEvent event) {
-        handleTextOutput ( txtMessage.getText (), LocalTime.now().format( DateTimeFormatter.ofPattern("HH:mm")) );
-        txtMessage.clear ();
+        if ( !txtMessage.getText ().isEmpty () ) {
+            handleTextOutput ( txtMessage.getText (), LocalTime.now().format( DateTimeFormatter.ofPattern("HH:mm")) );
+            txtMessage.clear ();
+        }
     }
 
     @FXML
