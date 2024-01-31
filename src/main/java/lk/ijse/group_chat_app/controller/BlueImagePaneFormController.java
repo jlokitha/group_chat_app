@@ -23,7 +23,7 @@ public class BlueImagePaneFormController {
         imageView.setPreserveRatio ( true );
 
         Label label = new Label ( time );
-        label.setTextFill ( Color.WHITE );
+        label.setTextFill ( Color.rgb(114, 119, 116) );
 
         vbox.getChildren ().add ( imageView );
         vbox.getChildren ().add ( label );

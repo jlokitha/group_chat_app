@@ -17,7 +17,7 @@ public class GreyImagePaneFormController {
 
     public void setData ( String sender, Image image, String time ) {
         Label lblSender = new Label ( sender );
-        lblSender.setTextFill ( Color.WHITE );
+        lblSender.setTextFill ( Color.rgb (44, 44, 212) );
         lblSender.setFont(new Font (14));
 
         ImageView imageView = new ImageView ( image );
@@ -26,7 +26,7 @@ public class GreyImagePaneFormController {
         imageView.setPreserveRatio ( true );
 
         Label lblTime = new Label ( time );
-        lblTime.setTextFill ( Color.WHITE );
+        lblTime.setTextFill ( Color.rgb(114, 119, 116) );
 
         vbox.getChildren ().add ( lblSender );
         vbox.getChildren ().add ( imageView );

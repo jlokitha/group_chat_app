@@ -5,14 +5,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane nodeOrientation="RIGHT_TO_LEFT" style="-fx-background-color: #0000ff; -fx-background-radius: 0 15 15 15;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.group_chat_app.controller.BlueTextBubbleFormController">
+<AnchorPane nodeOrientation="RIGHT_TO_LEFT" style="-fx-background-color: #25D366; -fx-background-radius: 15 15 15 0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.group_chat_app.controller.BlueTextBubbleFormController">
    <children>
-      <Label fx:id="lblMessage" alignment="CENTER_RIGHT" focusTraversable="false" layoutX="11.0" layoutY="4.0" nodeOrientation="RIGHT_TO_LEFT" textAlignment="JUSTIFY" textFill="WHITE" wrapText="true">
+      <Label fx:id="lblMessage" alignment="CENTER_RIGHT" focusTraversable="false" layoutX="11.0" layoutY="4.0" nodeOrientation="RIGHT_TO_LEFT" textAlignment="JUSTIFY" wrapText="true">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lblTime" focusTraversable="false" layoutX="11.0" layoutY="30.0" nodeOrientation="RIGHT_TO_LEFT" textAlignment="JUSTIFY" textFill="WHITE" />
+      <Label fx:id="lblTime" focusTraversable="false" layoutX="11.0" layoutY="30.0" nodeOrientation="RIGHT_TO_LEFT" textAlignment="JUSTIFY" textFill="#727374" />
    </children>
    <padding>
       <Insets bottom="6.0" left="10.0" />

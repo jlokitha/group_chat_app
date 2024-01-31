@@ -5,21 +5,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="652.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="71.0" prefWidth="652.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.group_chat_app.controller.GreyTextBubbleFormController">
+<AnchorPane maxHeight="-Infinity" maxWidth="652.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="71.0" prefWidth="652.0" style="-fx-background-color: #D2CECE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.group_chat_app.controller.GreyTextBubbleFormController">
    <children>
-      <AnchorPane layoutX="6.0" maxWidth="600.0" style="-fx-background-color: #808080; -fx-background-radius: 0 15 15 15;">
+      <AnchorPane layoutX="6.0" maxWidth="600.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 0 15 15 15;">
          <children>
-            <Label fx:id="lblName" alignment="CENTER_LEFT" focusTraversable="false" layoutX="19.0" layoutY="5.0" maxWidth="200.0" textAlignment="JUSTIFY" textFill="WHITE">
+            <Label fx:id="lblName" alignment="CENTER_LEFT" focusTraversable="false" layoutX="19.0" layoutY="5.0" maxWidth="200.0" textAlignment="JUSTIFY" textFill="#2c2cd4">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblMessage" alignment="CENTER_LEFT" focusTraversable="false" layoutX="18.0" layoutY="29.0" maxWidth="600.0" textAlignment="JUSTIFY" textFill="WHITE" wrapText="true">
+            <Label fx:id="lblMessage" alignment="CENTER_LEFT" focusTraversable="false" layoutX="18.0" layoutY="29.0" maxWidth="600.0" textAlignment="JUSTIFY" wrapText="true">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="lblTime" alignment="CENTER_RIGHT" focusTraversable="false" layoutX="19.0" layoutY="55.0" textAlignment="JUSTIFY" textFill="WHITE" />
+            <Label fx:id="lblTime" alignment="CENTER_RIGHT" focusTraversable="false" layoutX="19.0" layoutY="55.0" textAlignment="JUSTIFY" textFill="#727374" />
          </children>
          <padding>
             <Insets left="10.0" />

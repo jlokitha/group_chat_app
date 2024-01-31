@@ -1,70 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="700.0" style="-fx-background-color: #D2CECE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.group_chat_app.controller.ChatRoomFormController">
+<AnchorPane prefHeight="860.0" prefWidth="1000.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.group_chat_app.controller.ChatRoomFormController">
    <children>
-      <TextField fx:id="txtMessage" focusTraversable="false" layoutX="47.0" layoutY="740.0" prefHeight="40.0" prefWidth="500.0" promptText="Type a message">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </TextField>
-      <Button focusTraversable="false" layoutX="611.0" layoutY="740.0" mnemonicParsing="false" onAction="#btnSendOnAction" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: blue;" text="Send" textFill="WHITE">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Button focusTraversable="false" layoutX="557.0" layoutY="745.0" mnemonicParsing="false" onAction="#btnGalleryOnAction" prefHeight="30.0" prefWidth="35.0">
-         <graphic>
-            <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../asset/camera.png" />
-               </image>
-            </ImageView>
-         </graphic></Button>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="667.0" layoutY="8.0" onMouseClicked="#imgCloseOnMouseClicked" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../asset/close.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="634.0" layoutY="8.0" onMouseClicked="#imgMinimizeOnMouseClicked" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../asset/minimize.png" />
-         </image>
-      </ImageView>
-      <Button focusTraversable="false" layoutX="2.0" layoutY="745.0" mnemonicParsing="false" onAction="#btnEmojiOnAction" prefHeight="30.0" prefWidth="35.0">
-         <graphic>
-            <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../asset/camera.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Pane layoutX="20.0" layoutY="41.0" prefHeight="670.0" prefWidth="676.0">
+      <Pane layoutY="108.0" prefHeight="670.0" prefWidth="1000.0">
          <children>
-            <ScrollPane fx:id="scrollPane" focusTraversable="false" hbarPolicy="NEVER" prefHeight="670.0" prefWidth="676.0" vbarPolicy="ALWAYS">
+            <ScrollPane fx:id="scrollPane" focusTraversable="false" hbarPolicy="NEVER" prefHeight="670.0" prefWidth="1000.0" style="-fx-border-color: #FFFFFF;" vbarPolicy="ALWAYS">
                <content>
-                  <VBox fx:id="vbox" alignment="TOP_RIGHT" fillWidth="false" prefHeight="668.0" prefWidth="658.0" spacing="5.0" style="-fx-background-color: white;">
+                  <VBox fx:id="vbox" alignment="TOP_RIGHT" fillWidth="false" prefHeight="670.0" prefWidth="982.0" spacing="5.0" style="-fx-background-color: #E8E7E7;">
                      <padding>
                         <Insets bottom="6.0" right="6.0" top="6.0" />
                      </padding>
                   </VBox>
                </content>
             </ScrollPane>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d2cece" height="670.0" layoutX="660.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="16.0" />
          </children>
       </Pane>
       <AnchorPane fx:id="emojiPane" layoutX="21.0" layoutY="443.0" prefHeight="291.0" prefWidth="312.0" style="-fx-background-color: #FFFFFF;" visible="false" />
+      <Pane layoutX="982.0" layoutY="109.0" prefHeight="667.0" prefWidth="18.0" style="-fx-background-color: #E8E7E7;" />
+      <AnchorPane prefHeight="35.0" prefWidth="1000.0" style="-fx-background-color: #F6F6F6;">
+         <children>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="969.0" layoutY="5.0" onMouseClicked="#imgCloseOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/close.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="936.0" layoutY="5.0" onMouseClicked="#imgMinimizeOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/minimize.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="12.0" layoutY="5.0" onMouseClicked="#imgBackOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/back.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="17.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asset/profile.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblUser" layoutX="79.0" layoutY="53.0" text="Label" textFill="#727374">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Pane layoutX="835.0" layoutY="61.0" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: #42FF00; -fx-background-radius: 50;" />
+      <Label fx:id="lblOnlineCount" layoutX="866.0" layoutY="63.0" text="0 Online" textFill="#727374">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imgSend" fitHeight="60.0" fitWidth="60.0" layoutX="889.0" layoutY="789.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asset/send_btn_grey.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgEmoji" fitHeight="50.0" fitWidth="50.0" layoutX="40.0" layoutY="795.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asset/emoji_btn_grey.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgAttatch" fitHeight="50.0" fitWidth="50.0" layoutX="100.0" layoutY="795.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asset/attatch_btn_grey.png" />
+         </image>
+      </ImageView>
+      <JFXTextField fx:id="txtMessage" focusColor="#42ff00" focusTraversable="false" layoutX="162.0" layoutY="794.0" onAction="#txtMessageOnAction" prefHeight="50.0" prefWidth="714.0" promptText="Type a message" unFocusColor="#727374">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton layoutX="40.0" layoutY="795.0" onAction="#btnEmojiOnAction" onMouseEntered="#btnEmojiOnMouseEntered" onMouseExited="#btnEmojiOnMouseExited" prefHeight="50.0" prefWidth="50.0" text=" " />
+      <JFXButton layoutX="100.0" layoutY="795.0" onAction="#btnAttachOnAction" onMouseEntered="#btnAttachOnMouseEntered" onMouseExited="#btnAttachOnMouseExited" prefHeight="50.0" prefWidth="50.0" text=" " />
+      <JFXButton layoutX="889.0" layoutY="789.0" onAction="#btnSendOnAction" onMouseEntered="#btnSendOnMouseEntered" onMouseExited="#btnSendOnMouseExited" prefHeight="60.0" prefWidth="60.0" text=" " />
    </children>
 </AnchorPane>

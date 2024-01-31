@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -34,6 +35,21 @@ public class ChatRoomFormController implements Runnable, Initializable {
 
     @FXML
     public ScrollPane scrollPane;
+    
+    @FXML
+    public Label lblUser;
+    
+    @FXML
+    public Label lblOnlineCount;
+
+    @FXML
+    public ImageView imgSend;
+
+    @FXML
+    public ImageView imgEmoji;
+
+    @FXML
+    public ImageView imgAttatch;
 
     @FXML
     private VBox vbox;
@@ -61,7 +77,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
     @Override
     public void run () {
         try {
-            remoteSocket = new Socket ( "192.168.1.109", 5000 );
+            remoteSocket = new Socket ( "192.168.43.20", 5000 );
             in = new DataInputStream ( new BufferedInputStream ( remoteSocket.getInputStream ( ) ) );
             out = new DataOutputStream ( remoteSocket.getOutputStream ( ) );
 
@@ -104,25 +120,6 @@ public class ChatRoomFormController implements Runnable, Initializable {
             }
         } catch ( IOException e ) {
             shutdown ();
-        }
-    }
-
-    @FXML
-    void btnGalleryOnAction( ActionEvent event) throws IOException {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose Image File");
-
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
-        );
-
-        File file = fileChooser.showOpenDialog ( txtMessage.getScene ( ).getWindow ( ) );
-
-        if (file != null) {
-
-            byte[] imageBytes = Files.readAllBytes(file.toPath());
-
-            handleImageOutput ( imageBytes, LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")) );
         }
     }
 
@@ -207,17 +204,6 @@ public class ChatRoomFormController implements Runnable, Initializable {
     }
 
     @FXML
-    void btnSendOnAction(ActionEvent event) {
-        try {
-            emojiPane.setVisible ( false );
-            handleTextOutput ( txtMessage.getText (), LocalTime.now().format( DateTimeFormatter.ofPattern("HH:mm")) );
-            txtMessage.clear ();
-        } catch ( IOException e ) {
-            e.printStackTrace ();
-        }
-    }
-
-    @FXML
     public void imgCloseOnMouseClicked ( MouseEvent mouseEvent ) {
         shutdown ();
         System.exit ( 0 );
@@ -243,17 +229,6 @@ public class ChatRoomFormController implements Runnable, Initializable {
         }
     }
 
-    @FXML
-    public void btnEmojiOnAction ( ActionEvent actionEvent ) {
-        if ( !emojiPaneVisible ) {
-            emojiPaneVisible = true;
-            emojiPane.setVisible ( true );
-        } else {
-            emojiPaneVisible = false;
-            emojiPane.setVisible ( false );
-        }
-    }
-
     public void setEmojiToTxt (String unicode) {
         txtMessage.appendText ( unicode );
     }
@@ -271,41 +246,51 @@ public class ChatRoomFormController implements Runnable, Initializable {
         }
     }
 
-    public void handleTextOutput ( String message, String time) throws IOException {
-        if ( !message.startsWith ( "Username" ) && !message.startsWith ( "Shutdown" )) {
+    public void handleTextOutput ( String message, String time ) {
+        try {
+            if ( ! message.startsWith ( "Username" ) && ! message.startsWith ( "Shutdown" ) ) {
 
-            out.writeUTF ( "/txt" );
-            out.flush ( );
 
-            out.writeUTF ( message );
-            out.flush ( );
+                out.writeUTF ( "/txt" );
+                out.flush ( );
 
-            out.writeUTF ( time );
-            out.flush ();
+                out.writeUTF ( message );
+                out.flush ( );
 
-        } else {
+                out.writeUTF ( time );
+                out.flush ( );
 
-            out.writeUTF ( "/info" );
-            out.flush ();
 
-            out.writeUTF ( message );
-            out.flush ();
+            } else {
 
+                out.writeUTF ( "/info" );
+                out.flush ( );
+
+                out.writeUTF ( message );
+                out.flush ( );
+
+            }
+        } catch ( IOException e ) {
+            e.printStackTrace ( );
         }
     }
 
-    public void handleImageOutput ( byte[] imageBytes, String time) throws IOException {
-        out.writeUTF("/img");
-        out.flush();
+    public void handleImageOutput ( byte[] imageBytes, String time) {
+        try {
+            out.writeUTF("/img");
+            out.flush();
 
-        out.writeInt(imageBytes.length);
-        out.flush ();
+            out.writeInt(imageBytes.length);
+            out.flush ();
 
-        out.write(imageBytes);
-        out.flush();
+            out.write(imageBytes);
+            out.flush();
 
-        out.writeUTF ( time );
-        out.flush ();
+            out.writeUTF ( time );
+            out.flush ();
+        } catch ( IOException e ) {
+            e.printStackTrace ();
+        }
     }
 
     public void autoScrollDown () {
@@ -316,8 +301,93 @@ public class ChatRoomFormController implements Runnable, Initializable {
         });
     }
 
+    @FXML
+    void btnAttachOnAction(ActionEvent event) {
+        try {
+            FileChooser fileChooser = new FileChooser ( );
+            fileChooser.setTitle ( "Choose Image File" );
+
+            fileChooser.getExtensionFilters ( ).addAll (
+                    new FileChooser.ExtensionFilter ( "Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif" )
+            );
+
+            File file = fileChooser.showOpenDialog ( txtMessage.getScene ( ).getWindow ( ) );
+
+            if ( file != null ) {
+
+                byte[] imageBytes = Files.readAllBytes ( file.toPath ( ) );
+
+                handleImageOutput ( imageBytes, LocalTime.now ( ).format ( DateTimeFormatter.ofPattern ( "HH:mm" ) ) );
+            }
+        } catch ( IOException e ) {
+            e.printStackTrace ();
+        }
+    }
+
+    @FXML
+    void btnAttachOnMouseEntered(MouseEvent event) {
+        imgAttatch.setImage ( new Image ( "asset/attatch_btn_green.png" ) );
+    }
+
+    @FXML
+    void btnAttachOnMouseExited(MouseEvent event) {
+        imgAttatch.setImage ( new Image ( "asset/attatch_btn_grey.png" ) );
+    }
+
+    @FXML
+    void btnEmojiOnAction(ActionEvent event) {
+        if ( !emojiPaneVisible ) {
+            emojiPaneVisible = true;
+            emojiPane.setVisible ( true );
+        } else {
+            emojiPaneVisible = false;
+            emojiPane.setVisible ( false );
+            imgEmoji.setImage ( new Image ( "asset/emoji_btn_grey.png" ) );
+        }
+    }
+
+    @FXML
+    void btnEmojiOnMouseEntered(MouseEvent event) {
+        if ( !emojiPaneVisible ) {
+            imgEmoji.setImage ( new Image ( "asset/emoji_btn_green.png" ) );
+        }
+    }
+
+    @FXML
+    void btnEmojiOnMouseExited(MouseEvent event) {
+        if ( !emojiPaneVisible ) {
+            imgEmoji.setImage ( new Image ( "asset/emoji_btn_grey.png" ) );
+        }
+    }
+
+    @FXML
+    void btnSendOnAction(ActionEvent event) {
+        handleTextOutput ( txtMessage.getText (), LocalTime.now().format( DateTimeFormatter.ofPattern("HH:mm")) );
+        txtMessage.clear ();
+    }
+
+    @FXML
+    void btnSendOnMouseEntered(MouseEvent event) {
+        imgSend.setImage ( new Image ( "asset/send_btn_green.png" ) );
+    }
+
+    @FXML
+    void btnSendOnMouseExited(MouseEvent event) {
+        imgSend.setImage ( new Image ( "asset/send_btn_grey.png" ) );
+    }
+
+    @FXML
+    public void txtMessageOnAction ( ActionEvent actionEvent ) {
+        btnSendOnAction ( new ActionEvent () );
+    }
+
+    @FXML
+    public void imgBackOnMouseClicked ( MouseEvent mouseEvent ) {
+    }
+
     @Override
     public void initialize ( URL url, ResourceBundle resourceBundle ) {
+        lblUser.setText ( username );
         loadEmojiPane ();
         autoScrollDown ();
 
