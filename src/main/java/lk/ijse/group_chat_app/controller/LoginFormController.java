@@ -16,12 +16,12 @@ import java.util.regex.Pattern;
 
 public class LoginFormController {
     @FXML
-    public TextField txtUserName;
+    public TextField txtUsername;
 
     @FXML
     public void btnLoginOnAction ( ActionEvent event ) {
-        if ( validateUsername ( txtUserName.getText (  ) ) ) {
-            ChatRoomFormController.username = txtUserName.getText ();
+        if ( validateUsername ( txtUsername.getText (  ) ) ) {
+            ChatRoomFormController.username = txtUsername.getText ();
             try {
                 Parent parent = FXMLLoader.load ( this.getClass ().getResource ( "/view/chatRoomForm.fxml" ) );
                 Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
@@ -43,6 +43,11 @@ public class LoginFormController {
     public void imgMinimizeOnMouseClicked ( MouseEvent mouseEvent ) {
         Stage stage = (Stage)((ImageView)mouseEvent.getSource()).getScene().getWindow();
         stage.setIconified(true);
+    }
+
+    @FXML
+    public void txtUsernameOnAction ( ActionEvent actionEvent ) {
+        btnLoginOnAction ( new ActionEvent () );
     }
 
     public boolean validateUsername (String username) {
