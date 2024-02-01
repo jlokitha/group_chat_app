@@ -47,7 +47,7 @@ public class LoginFormController {
 
     @FXML
     public void txtUsernameOnAction ( ActionEvent actionEvent ) {
-        btnLoginOnAction ( new ActionEvent () );
+        btnLoginOnAction ( actionEvent );
     }
 
     public boolean validateUsername (String username) {

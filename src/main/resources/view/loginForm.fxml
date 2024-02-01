@@ -7,34 +7,34 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.group_chat_app.controller.LoginFormController">
+<AnchorPane prefHeight="647.0" prefWidth="930.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.group_chat_app.controller.LoginFormController">
    <children>
-      <ImageView fitHeight="700.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="647.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../asset/login_pane.png" />
          </image>
       </ImageView>
-      <JFXButton layoutX="543.0" layoutY="427.0" onAction="#btnLoginOnAction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #42FF00; -fx-background-radius: 10;" text="Log In">
+      <JFXButton layoutX="503.0" layoutY="430.0" onAction="#btnLoginOnAction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #42FF00; -fx-background-radius: 10;" text="Log In">
          <font>
             <Font size="15.0" />
          </font>
       </JFXButton>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="965.0" layoutY="10.0" onMouseClicked="#imgCloseOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="894.0" layoutY="10.0" onMouseClicked="#imgCloseOnMouseClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../asset/close.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="932.0" layoutY="10.0" onMouseClicked="#imgMinimizeOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="861.0" layoutY="10.0" onMouseClicked="#imgMinimizeOnMouseClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../asset/minimize.png" />
          </image>
       </ImageView>
-      <JFXTextField fx:id="txtUsername" focusColor="#42ff00" layoutX="323.0" layoutY="339.0" onAction="#txtUsernameOnAction" prefHeight="50.0" prefWidth="420.0" promptText="Enter Username" style="-fx-background-color: white; -fx-background-radius: 10;" unFocusColor="#727373">
+      <JFXTextField fx:id="txtUsername" focusColor="#42ff00" layoutX="283.0" layoutY="342.0" onAction="#txtUsernameOnAction" prefHeight="50.0" prefWidth="420.0" promptText="Enter Username" style="-fx-background-color: white; -fx-background-radius: 10;" unFocusColor="#727373">
          <font>
             <Font size="18.0" />
          </font>
       </JFXTextField>
-      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="257.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="217.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../asset/profile.png" />
          </image>

@@ -22,6 +22,7 @@ public class Server implements Runnable {
         try {
             serverSocket = new ServerSocket ( 5000 );
             threadPool = Executors.newCachedThreadPool ( );
+            System.out.println ( "Server running !" );
 
             while ( true ) {
                 Socket client = serverSocket.accept ( );

@@ -90,7 +90,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
     @Override
     public void run () {
         try {
-            remoteSocket = new Socket ( "192.168.43.20", 5000 );
+            remoteSocket = new Socket ( "192.168.1.110", 5000 );
             in = new DataInputStream ( new BufferedInputStream ( remoteSocket.getInputStream ( ) ) );
             out = new DataOutputStream ( remoteSocket.getOutputStream ( ) );
 
@@ -404,6 +404,10 @@ public class ChatRoomFormController implements Runnable, Initializable {
 
     @FXML
     void btnSendOnAction(ActionEvent event) {
+        if ( emojiPaneVisible ) {
+            btnEmojiOnAction ( new ActionEvent () );
+        }
+
         if ( !txtMessage.getText ().isEmpty () ) {
             handleTextOutput ( txtMessage.getText (), LocalTime.now().format( DateTimeFormatter.ofPattern("HH:mm")) );
             txtMessage.clear ();

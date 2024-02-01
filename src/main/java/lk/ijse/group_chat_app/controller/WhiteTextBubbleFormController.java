@@ -17,7 +17,5 @@ public class WhiteTextBubbleFormController {
         lblName.setText ( sender );
         lblMessage.setText ( message );
         lblTime.setText ( time );
-
-        lblTime.setLayoutX ( lblMessage.getText ().length () * 8.7 );  //Move label to right side
     }
 }
