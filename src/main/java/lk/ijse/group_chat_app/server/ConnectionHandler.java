@@ -1,8 +1,7 @@
-package lk.ijse.group_chat_app;
+package lk.ijse.group_chat_app.server;
 
 import java.io.*;
 import java.net.Socket;
-import java.time.LocalTime;
 
 public class ConnectionHandler implements Runnable {
     private Socket client;
@@ -23,7 +22,7 @@ public class ConnectionHandler implements Runnable {
 
             while ( (message = in.readUTF ()) != null ) {
 
-
+                //Handle information
                 if (message.equals ( "/info" )) {
 
                     message = in.readUTF ();
@@ -44,7 +43,7 @@ public class ConnectionHandler implements Runnable {
                         shutdown ();
 
                     }
-
+                //Handle text messages
                 } else if ( message.equals ( "/txt" ) ){
 
                     String msg = in.readUTF ();
@@ -52,6 +51,7 @@ public class ConnectionHandler implements Runnable {
 
                     Server.getServer ().broadcastText ( username, msg, time );
 
+                //Handle images
                 } else if ( message.equals ( "/img" ) ) {
 
                     int imageLength = in.readInt ( );
@@ -129,6 +129,7 @@ public class ConnectionHandler implements Runnable {
         }
     }
 
+    //Close socket and data input / output stream when user exit
     public void shutdown() {
         try {
             in.close ();

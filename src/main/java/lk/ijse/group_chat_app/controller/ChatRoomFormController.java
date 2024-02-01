@@ -138,12 +138,14 @@ public class ChatRoomFormController implements Runnable, Initializable {
         }
     }
 
+    //Update online user count
     private void setOnlineCount ( int onlineCount ) {
         Platform.runLater ( () -> {
             lblOnlineCount.setText ( onlineCount + " Online" );
         } );
     }
 
+    //Set information to vbox
     public void setInfoToVbox( String sender, String message) {
         Platform.runLater ( ( ) -> {
 
@@ -159,6 +161,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
         } );
     }
 
+    //Invoke correct method based on sender of the message
     public void setTextToVbox(String sender, String message, String time) {
         Platform.runLater ( ( ) -> {
 
@@ -171,6 +174,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
         } );
     }
 
+    //Set text messages sent by other users
     public void setOtherMessage ( String sender, String message, String time ) {
         try {
             FXMLLoader loader = new FXMLLoader ( ChatRoomFormController.class.getResource ( "/view/whiteTextBubbleForm.fxml" ) );
@@ -184,6 +188,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
         }
     }
 
+    //Set text messages sent by user
     public void setMyMessage (String message, String time) {
         try {
             FXMLLoader loader = new FXMLLoader ( ChatRoomFormController.class.getResource ( "/view/greenTextBubbleForm.fxml" ) );
@@ -197,6 +202,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
         }
     }
 
+    //Set images to vbox according to sender
     public void setImgToVbox( String sender, byte[] imageData, String time ) {
         Platform.runLater(() -> {
 
@@ -233,12 +239,14 @@ public class ChatRoomFormController implements Runnable, Initializable {
         System.exit ( 0 );
     }
 
+    //Minimize chat UI
     @FXML
     public void imgMinimizeOnMouseClicked ( MouseEvent mouseEvent ) {
         Stage stage = ( Stage) ((ImageView)mouseEvent.getSource ()).getScene ().getWindow ();
         stage.setIconified ( true );
     }
 
+    //Notify server side that user exit the app and close socket and data input / output stream
     public void shutdown() {
         try {
             out.writeUTF ( "/info" );
@@ -258,10 +266,12 @@ public class ChatRoomFormController implements Runnable, Initializable {
         }
     }
 
+    //Add unicode of emoji to text field
     public void setEmojiToTxt (String unicode) {
         txtMessage.appendText ( unicode );
     }
 
+    //Create new emoji pane object and set it to anchor pane
     public void loadEmojiPane () {
         try {
             emojiPane.getChildren().clear();
@@ -278,7 +288,6 @@ public class ChatRoomFormController implements Runnable, Initializable {
     public void handleTextOutput ( String message, String time ) {
         try {
             if ( ! message.startsWith ( "Username" ) ) {
-
 
                 out.writeUTF ( "/txt" );
                 out.flush ( );
@@ -322,6 +331,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
         }
     }
 
+    //Scroll to bottom of the scroll pane
     public void autoScrollDown () {
         scrollPane.needsLayoutProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) {
@@ -333,6 +343,8 @@ public class ChatRoomFormController implements Runnable, Initializable {
     @FXML
     void btnAttachOnAction(ActionEvent event) {
         try {
+            //Create new file chooser and add extension filter so other than images can't be selected
+
             FileChooser fileChooser = new FileChooser ( );
             fileChooser.setTitle ( "Choose Image File" );
 
@@ -340,10 +352,11 @@ public class ChatRoomFormController implements Runnable, Initializable {
                     new FileChooser.ExtensionFilter ( "Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif" )
             );
 
+            //Save selected image as file
             File file = fileChooser.showOpenDialog ( txtMessage.getScene ( ).getWindow ( ) );
 
             if ( file != null ) {
-
+                //Convert selected image to byte[]
                 byte[] imageBytes = Files.readAllBytes ( file.toPath ( ) );
 
                 handleImageOutput ( imageBytes, LocalTime.now ( ).format ( DateTimeFormatter.ofPattern ( "HH:mm" ) ) );
@@ -415,6 +428,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
     @FXML
     public void imgBackOnMouseClicked ( MouseEvent mouseEvent ) {
         try {
+            //Close socket and data input / output stream before going to login page
             shutdown ();
 
             Parent parent = FXMLLoader.load ( this.getClass ().getResource ( "/view/loginForm.fxml" ) );

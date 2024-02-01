@@ -1,4 +1,4 @@
-package lk.ijse.group_chat_app;
+package lk.ijse.group_chat_app.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -36,6 +36,7 @@ public class Server implements Runnable {
         }
     }
 
+    //Broadcast information to current users
     public void broadcastInfo ( String sender, String message ) {
         for (ConnectionHandler client : connectionList) {
             if ( client != null ) {
@@ -44,6 +45,7 @@ public class Server implements Runnable {
         }
     }
 
+    //Broadcast text messages to current users
     public void broadcastText ( String sender, String message, String time) {
         for (ConnectionHandler client : connectionList) {
             if ( client != null ) {
@@ -52,6 +54,7 @@ public class Server implements Runnable {
         }
     }
 
+    //Broadcast images to current users
     public void broadcastImage ( String sender, byte[] imageData, String time ) {
         for (ConnectionHandler client : connectionList) {
             if ( client != null ) {
@@ -60,6 +63,7 @@ public class Server implements Runnable {
         }
     }
 
+    //Remove ConnectionHandler object corresponding to users who exit from chat
     public void removeConnectionHandler(ConnectionHandler connectionHandler) {
         connectionList.remove(connectionHandler);
     }

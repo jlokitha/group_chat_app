@@ -18,9 +18,9 @@ public class GreenImagePaneFormController {
         vbox.setAlignment ( Pos.TOP_RIGHT );
 
         ImageView imageView = new ImageView ( image );
-        imageView.setFitWidth ( 300 );
-        imageView.setFitHeight ( 300 );
-        imageView.setPreserveRatio ( true );
+        imageView.setFitWidth ( 300 );  //Set image view width to 300
+        imageView.setFitHeight ( 300 );  //Set image view height to 300
+        imageView.setPreserveRatio ( true );  //Maintains the original proportions of the image
 
         Label label = new Label ( time );
         label.setTextFill ( Color.rgb(114, 119, 116) );
