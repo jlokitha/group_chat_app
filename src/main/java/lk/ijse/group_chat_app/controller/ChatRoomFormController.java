@@ -90,7 +90,7 @@ public class ChatRoomFormController implements Runnable, Initializable {
     @Override
     public void run () {
         try {
-            remoteSocket = new Socket ( "192.168.1.110", 5000 );
+            remoteSocket = new Socket ( "localhost", 5000 );
             in = new DataInputStream ( new BufferedInputStream ( remoteSocket.getInputStream ( ) ) );
             out = new DataOutputStream ( remoteSocket.getOutputStream ( ) );
 
